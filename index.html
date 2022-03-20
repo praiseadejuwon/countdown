@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Launch countdown timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap" rel="stylesheet">
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img{
+    max-width: 100%;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.stars{
+    position: absolute;
+}
+
+.hills{
+    position: absolute;
+    bottom: 0;
+}
+body{
+    font-family: "Red Hat Text", sans-serif;
+    background-color: hsl(235, 16%, 14%);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+}
+
+.container h1{
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+}
+
+.countdown{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+.countdown div{
+    margin: 10px;
+}
+
+.countdown p{
+    padding: 20px;
+    background-color: hsl(236, 21%, 26%);
+    border-radius: 5px;
+    color: hsl(345, 91%, 68%);
+    font-size: 46px;
+}
+.countdown h3{
+    color: hsl(237, 18%, 59%);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.socials{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
+.socials ul{
+    display: flex;
+}
+
+.socials ul li{
+    margin: 0 20px;
+}
+.attribution { 
+    font-size: 11px; text-align: center; 
+    color: white;
+}
+.attribution a { 
+    color: hsl(228, 45%, 44%); 
+}
+
+@media (max-width: 600px) {
+    .stars img,
+    .hills img {
+        width:375px
+    }
+
+    .countdown p{
+    padding: 20px;
+    background-color: hsl(236, 21%, 26%);
+    border-radius: 5px;
+    color: hsl(345, 91%, 68%);
+    font-size: 26px;
+    font-weight: bold;
+}   
+
+.countdown div{
+    margin: 6px;
+    width: 80px;
+}
+
+.countdown h3{
+    color: hsl(237, 18%, 59%);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="stars">
+    <img src="bg-stars.svg" alt="">
+  </div>
+<h1>
+  We're launching soon
+</h1>
+  <div class="countdown">
+      <div>
+            <p id="days">{time}</p>
+            <h3>Days</h3>
+      </div>
+      <div>
+            <p id="hours">{time}</p>
+            <h3>Hours</h3>
+      </div>
+      <div>
+          <p id="minutes">{time}</p>
+          <h3>Minutes</h3>
+      </div>
+      <div>
+            <p id="seconds">{time}</p>
+            <h3>Seconds</h3>
+      </div>
+  </div>
+  <div class="socials">
+    <ul>
+      <li><img src="icon-facebook.svg" alt=""></li>
+      <li><img src="icon-pinterest.svg" alt=""></li>
+      <li><img src="icon-instagram.svg" alt=""></li>
+    </ul>
+  </div>
+
+  <div class="hills">
+    <img src="pattern-hills.svg" alt="">
+  </div>
+</div>
+  
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"> Frontend Mentor</a>. 
+    Coded by <a href="#">PRAISE ADEJUWON</a>.
+  </div>
+
+<script>
+const countdown = () => {
+    const endDate = new Date("October 1, 2022 00:00:00").getTime()
+    const now = new Date().getTime()
+
+    const difference = endDate - now
+    
+
+    const seconds = 1000
+    const minutes = seconds * 60
+    const hours = minutes * 60
+    const days = hours * 24 
+
+
+    let timeDays = Math.floor(difference / days);
+    let timeHours = Math.floor((difference % days) / hours)
+    let timeMinutes = Math.floor((difference % hours) / minutes)
+    let timeSeconds = Math.floor((difference % minutes) / seconds)
+
+    timeHours = timeHours < 10 ? "0" + timeHours : timeHours
+    timeMinutes = timeMinutes < 10 ? "0" + timeMinutes : timeMinutes
+    timeSeconds = timeSeconds < 10 ? "0" + timeSeconds : timeSeconds
+
+
+
+    document.getElementById("days").innerText = timeDays
+    document.getElementById("hours").innerText = timeHours
+    document.getElementById("minutes").innerText = timeMinutes
+    document.getElementById("seconds").innerText = timeSeconds
+  
+
+    setInterval (countdown, 1000)
+}
+countdown()
+
+</script>
+</body>
+</html>
